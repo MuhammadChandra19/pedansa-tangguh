@@ -10,6 +10,7 @@
     "strict": false,
     "sourceMap": true,
     "declaration": true,
+    "checkJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
@@ -20,10 +21,21 @@
   },
   "include": [
     "src/**/*.ts",
+    "/**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.js"
   ],
+  "typeRoots": [
+    "./utils",
+    "./node_modules/@types"
+  ],
+  "paths": {
+    "*": [
+      "node_modules/*",
+      "src/utils/*"
+    ]
+  },
   "exclude": [
     "node_modues"
   ]

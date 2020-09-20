@@ -4,6 +4,8 @@ import SocketHandler from '../domain/socket'
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
+import { routes } from "../routes";
+
 export class App {
   private app!: Application;
   public httpServer!: HTTPServer;
@@ -16,6 +18,7 @@ export class App {
     this.app.use(bodyParser.json());
     this.httpServer = createServer(this.app);
     this.socketHandler = new SocketHandler(this.httpServer);
+    routes(this.app);
   }
 
   public getApp(): Application {

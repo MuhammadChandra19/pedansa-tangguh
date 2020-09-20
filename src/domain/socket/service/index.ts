@@ -1,7 +1,6 @@
 import { App } from "../../../http/app"
 import { IMessageClient, ILiveStream } from "../model";
 import { INCOMING_MESSAGE, RUNNING_LIVE_STREAM, SERVER_MESSAGE } from "../../../constant/action";
-
 interface ISocketService {
   handleSendMessage: ({ name, room, message, date }: IMessageClient) => void;
   handleNewLiveStream: (liveData: ILiveStream) => void;
@@ -22,7 +21,7 @@ export const socketService = (): ISocketService => {
   }
 
   const handleJoinLiveRoom = (name: string, room: string): void => {
-    const { socket } = global;
+    const socket = globalThis.socket as SocketIO.Socket;
     if (socket) {
       socket.broadcast.to(room).emit(SERVER_MESSAGE, `${name} has joined the room!`);
       socket.join(room);

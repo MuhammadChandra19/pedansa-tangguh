@@ -10,7 +10,9 @@ class SocketHandler {
     this.io = socketIO(httpServer);
 
     this.ioNameSpace = this.io.on('connection', socket => {
-      global.socket = socket;
+      // global.socket = socket;
+      var tempSocket = socket;
+      globalThis.socket = tempSocket;
       socket.on("disconnect", () => console.log(`${socket.id} User disconnected.`));
     });
 
