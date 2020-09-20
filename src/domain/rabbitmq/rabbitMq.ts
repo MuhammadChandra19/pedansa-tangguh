@@ -1,10 +1,8 @@
-import { connect, Connection, Channel } from 'amqplib/callback_api';
+import { Connection, Channel } from 'amqplib/callback_api';
+import { connectRabbit } from './connectRabbit';
 
 export const sendRabbitMQ = (queueName: string, data: string) => {
-  connect(process.env.RABBITMQ_URL, (error0: any, connection: Connection) => {
-    if (error0) {
-      throw error0;
-    }
+  connectRabbit((connection: Connection) => {
     connection.createChannel((err: any, channel: Channel) => {
       if (err) {
         throw err;
