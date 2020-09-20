@@ -1,4 +1,4 @@
-import { createServer, Server as HTTPServer } from "http";
+import { Server as HTTPServer } from "http";
 import { config } from "dotenv";
 import { App } from "./http/app";
 
@@ -13,7 +13,7 @@ export class Server {
 
   private initialize(): void {
     this.app = new App();
-    this.httpServer = createServer(this.app.getApp());
+    this.httpServer = this.app.httpServer;
   }
 
   public listen(callback: (port: any) => void): void {
