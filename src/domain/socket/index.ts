@@ -2,7 +2,7 @@ import { Server as HTTPServer } from "http";
 import socketIO, { Namespace, Server } from "socket.io";
 
 class SocketHandler {
-  private io!: Server;
+  public io!: Server;
   public ioNameSpace: Namespace;
 
   constructor(httpServer: HTTPServer) {
@@ -12,8 +12,11 @@ class SocketHandler {
     this.ioNameSpace = this.io.on('connection', socket => {
       // global.socket = socket;
       var tempSocket = socket;
+      globalThis.io = this.io
       globalThis.socket = tempSocket;
-      socket.on("disconnect", () => console.log(`${socket.id} User disconnected.`));
+      socket.on("disconnect", () => {
+        console.log(`${socket.id} User disconnected.`)
+      });
     });
 
   }

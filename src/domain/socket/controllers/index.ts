@@ -25,6 +25,7 @@ export const socketControllers = (): ISocketControllers => {
   }
 
   const notifyNewLiveStream = async (req: any, res: any): Promise<void> => {
+    // console.log(req.body)
     postResponse(res,
       () => sendRabbitMQ(RUNNING_LIVE_STREAM, JSON.stringify(req.body)),
       req.body
