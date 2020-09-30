@@ -2,7 +2,7 @@ import { Application } from "express";
 import { socketControllers } from "../domain/socket/controllers";
 
 export const routes = (app: Application) => {
-  const { enterLiveRoom, notifyNewLiveStream, sendMessage } = socketControllers();
+  const { enterLiveRoom, notifyNewLiveStream, sendMessage, updateTotalStreamer } = socketControllers();
 
   app.route("/")
     .get((req, res) => {
@@ -15,7 +15,8 @@ export const routes = (app: Application) => {
   app.route("/chat")
     .post(sendMessage);
 
-  app.route("/enterLiveRoom")
-    .post(enterLiveRoom);
+  app.route("/updateCount")
+    .post(updateTotalStreamer)
+
 
 }

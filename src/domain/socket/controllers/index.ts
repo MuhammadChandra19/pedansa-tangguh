@@ -1,11 +1,12 @@
 import { sendRabbitMQ } from "../../rabbitmq/rabbitMq"
-import { ENTER_LIVE_ROOM, SEND_MESSAGE, RUNNING_LIVE_STREAM } from "../../../constant/action"
+import { ENTER_LIVE_ROOM, SEND_MESSAGE, RUNNING_LIVE_STREAM, COUNT_STREAMER } from "../../../constant/action"
 import { postResponse } from '../../../utils/commonHttpResponse'
 
 interface ISocketControllers {
   enterLiveRoom: (req: any, res: any) => Promise<void>;
   sendMessage: (req: any, res: any) => Promise<void>;
   notifyNewLiveStream: (req: any, res: any) => Promise<void>;
+  updateTotalStreamer: (req: any, res: any) => Promise<void>
 }
 
 export const socketControllers = (): ISocketControllers => {
@@ -32,9 +33,19 @@ export const socketControllers = (): ISocketControllers => {
     )
   }
 
+  const updateTotalStreamer = async (req: any, res: any): Promise<void> => {
+    postResponse(res,
+      () => {
+        console.log(req.body)
+        sendRabbitMQ(COUNT_STREAMER, JSON.stringify(req.body))
+      }
+    )
+  }
+
   return {
     enterLiveRoom,
     sendMessage,
-    notifyNewLiveStream
+    notifyNewLiveStream,
+    updateTotalStreamer
   }
 }
