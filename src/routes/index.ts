@@ -17,8 +17,7 @@ export const routes = (app: Application) => {
 
   app.route("/enterLiveRoom")
     .post(enterLiveRoom);
-
-  app.route("/pushPayment")
+  app.route("/push/payment")
     .post(pushPayment)
 
 }

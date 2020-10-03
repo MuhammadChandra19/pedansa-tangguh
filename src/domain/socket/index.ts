@@ -11,6 +11,7 @@ class SocketHandler {
 
     this.ioNameSpace = this.io.on('connection', socket => {
       // global.socket = socket;
+      console.log(socket.id)
       var tempSocket = socket;
       globalThis.io = this.io
       globalThis.socket = tempSocket;

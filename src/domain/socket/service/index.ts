@@ -39,10 +39,7 @@ export const socketService = (): ISocketService => {
   }
 
   const handlePushPayment = (id): void => {
-    const socket = globalThis.socket;
-    if (socket) {
-      socket.broadcast.to(id).emit(PAYMENT_PUSH, 'pembayaran berhasil')
-    }
+    globalThis.io.to(id).emit(PAYMENT_PUSH, 'pembayaran berhasil')
   }
 
   return {
