@@ -1,9 +1,10 @@
 import { IMessageClient, ILiveStream } from "../model";
-import { INCOMING_MESSAGE, RUNNING_LIVE_STREAM, SERVER_MESSAGE } from "../../../constant/action";
+import { INCOMING_MESSAGE, PAYMENT_PUSH, RUNNING_LIVE_STREAM, SERVER_MESSAGE } from "../../../constant/action";
 interface ISocketService {
   handleSendMessage: ({ name, room, message, date }: IMessageClient) => void;
   handleNewLiveStream: (liveData: ILiveStream) => void;
   handleJoinLiveRoom: (name: string, room: string) => void;
+  handlePushPayment: (id: any) => void;
 }
 
 export const socketService = (): ISocketService => {
@@ -37,10 +38,18 @@ export const socketService = (): ISocketService => {
       });
   }
 
+  const handlePushPayment = (id): void => {
+    const socket = globalThis.socket;
+    if (socket) {
+      socket.broadcast.to(id).emit(PAYMENT_PUSH, 'pembayaran berhasil')
+    }
+  }
+
   return {
     handleSendMessage,
     handleNewLiveStream,
-    handleJoinLiveRoom
+    handleJoinLiveRoom,
+    handlePushPayment,
   }
 
 }
