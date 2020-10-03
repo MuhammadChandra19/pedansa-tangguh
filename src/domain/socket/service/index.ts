@@ -4,7 +4,7 @@ interface ISocketService {
   handleSendMessage: ({ name, room, message, date }: IMessageClient) => void;
   handleNewLiveStream: (liveData: ILiveStream) => void;
   handleJoinLiveRoom: (name: string, room: string) => void;
-  handlePushPayment: (id: any) => void;
+  handlePushPayment: (id: string, orderId: string, message: string) => void;
 }
 
 export const socketService = (): ISocketService => {
@@ -38,8 +38,8 @@ export const socketService = (): ISocketService => {
       });
   }
 
-  const handlePushPayment = (id): void => {
-    globalThis.io.to(id).emit(PAYMENT_PUSH, 'pembayaran berhasil')
+  const handlePushPayment = (id: string, orderId: string, message: string): void => {
+    globalThis.io.to(id).emit(PAYMENT_PUSH, { orderId, message })
   }
 
   return {

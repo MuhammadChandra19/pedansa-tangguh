@@ -28,8 +28,8 @@ export const startConsumer = () => {
   });
 
   connectRabbit((connection: Connection) => {
-    createRabbitChannel<{ id: string }>(connection, PAYMENT_PUSH, ({ id }) => {
-      handlePushPayment(id)
+    createRabbitChannel<{ id: string, orderId: string, message: string }>(connection, PAYMENT_PUSH, ({ id, message, orderId }) => {
+      handlePushPayment(id, orderId, message)
     });
   });
 }
