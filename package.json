@@ -4,7 +4,7 @@
   "description": "socket service bantayahall",
   "main": "index.js",
   "scripts": {
-    "start": "rimraf dist && tsc && node dist/index.js",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
   },
   "author": "Muhammad chandra zulfikar",
@@ -17,7 +17,6 @@
     "@types/node": "^14.11.1",
     "@types/socket.io": "^2.1.11",
     "nodemon": "^2.0.4",
-    "rimraf": "^3.0.2",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   },

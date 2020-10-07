@@ -15,7 +15,7 @@ COPY package.json .
 COPY package-lock.json .
 
 # Install dependencies
-RUN npm install --production
+RUN npm install
 
 # Copy all files
 COPY . .
