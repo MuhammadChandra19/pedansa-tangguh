@@ -1,5 +1,5 @@
 import { postResponse } from '../../../utils/commonHttpResponse'
-import { socketService } from "../../../../dist/domain/socket/service";
+import { socketService } from '../service'
 
 interface ISocketControllers {
   enterLiveRoom: (req: any, res: any) => Promise<void>;
